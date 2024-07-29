@@ -1,9 +1,17 @@
 # Hacer fetch de datos desde un API
+Este proyecto se realizó siguiendo [este](https://www.youtube.com/watch?v=6u1RHUoXIPI) tutorial de Youtube 
 
 ## Crear el proyecto con Vite
 Por facilidad se crea un proyecto con la herramienta de generación vite con el siguiente comando y se siguen las instrucciones
 ``` bash
 $ npm create vite@latest
+```
+
+Se ingresa a la carpeta del proyecto, se instalan las dependencias y se ejecuta la aplicación
+``` bash
+$ cd nombre-proyecto
+$ npm install
+$ npm run dev
 ```
 
 ## Obtener datos desde una API
@@ -31,6 +39,23 @@ const [data, setData] = useState(null)
     </ul>
 ```
 5. Convertir el proceso en un custom hook. Los hooks siguen la nomenclatura `useFuncionalidad` por lo que se creará un archivo llamado `useFetch` en la carpeta `hooks` para pasar la funcionalidad al nuevo archivo
-``` js useFetch.jsx
+`hooks/useFetch.jsx`
+``` jsx
+import { useEffect, useState } from "react";
 
+export function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { data, loading };
+}
 ```
