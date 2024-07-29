@@ -30,3 +30,7 @@ const [data, setData] = useState(null)
         })}
     </ul>
 ```
+5. Convertir el proceso en un custom hook. Los hooks siguen la nomenclatura `useFuncionalidad` por lo que se creará un archivo llamado `useFetch` en la carpeta `hooks` para pasar la funcionalidad al nuevo archivo
+``` js useFetch.jsx
+
+```
